@@ -370,7 +370,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('img_path', type=str, help='Path to image file. (With extension pls)')
-    parser.add_argument('-p', '--preprocess', action='store_true', help='If present image is preprocessed however the fuck i feel like')
+    parser.add_argument('-p', '--preprocess', action='store_true', help='If present image is preprocessed however i feel like')
     args = parser.parse_args()
 
     WIDTH, HEIGHT = 900, 900
