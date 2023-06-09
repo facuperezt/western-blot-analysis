@@ -12,6 +12,74 @@ def parse_args():
 
     return parser.parse_args()
 
+def plot_differences(data_path = None, stimulationen = None, savefig_name = ""):
+    if data_path is None:
+        raise ValueError('Schatzi die Dateiname nicht vergessen.')
+    if stimulationen is None:
+        stimulationen = [7, 8, 9]
+    else:
+        stimulationen = [int(t) for t in stimulationen]
+    if savefig_name == "": # for consistency with GUI
+        savefig_name = None
+    data = pd.read_excel(data_path).to_numpy()
+    legend = data[1:, 0]
+    x_ticks = data[0, 1:].astype(int)
+    data = data[1:, 1:].T.astype(np.float64)
+    stim = data[stimulationen[0]-1:stimulationen[-1]+1]
+    stim_diff = stim[1:] - stim[:-1]
+    legend = legend[1:]
+    stim_diff = stim_diff[:,1:]
+
+    fig, ax = plt.subplots(figsize=(8,5))
+    x = np.arange(stim_diff.shape[1])
+
+    for i, day in enumerate(stim_diff):
+        p = ax.plot(x, day, '--o', label=f"Day: {stimulationen[i]}{chr(int('2192', 16))}{stimulationen[i]+1}")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(legend, rotation=30)
+    ax.set_ylabel(r"$\Delta$ pro Tag [$\Omega$ x $cm^2$]", fontdict={'size': 15})
+    ax.set_xlabel(r"Cytokine", fontdict={'size': 15})
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.grid(visible=True, which='major', axis='y')
+    ax.set_axisbelow(True)
+    ax.legend(frameon=True)
+    ax.set_title("Pro-Tag Differenz über die Stimulationstage")
+    fig.show()
+
+def plot_total_differences(data_path = None, stimulationen = None, savefig_name = ""):
+    if data_path is None:
+        raise ValueError('Schatzi die Dateiname nicht vergessen.')
+    if stimulationen is None:
+        stimulationen = [7, 8, 9]
+    else:
+        stimulationen = [int(t) for t in stimulationen]
+    if savefig_name == "": # for consistency with GUI
+        savefig_name = None
+    data = pd.read_excel(data_path).to_numpy()
+    legend = data[1:, 0]
+    x_ticks = data[0, 1:].astype(int)
+    data = data[1:, 1:].T.astype(np.float64)
+    stim = data[stimulationen[0]-1:stimulationen[-1]+1]
+    stim_diff = stim[1:] - stim[:-1]
+    stim_diff_total = stim_diff.sum(axis=0)[1:]
+
+    fig, ax = plt.subplots(figsize=(9,6))
+    colors = {-1 : 'red', 1 : 'blue'}
+    x = np.arange(len(stim_diff_total))
+    ax.bar(x,stim_diff_total, width= 0.6, alpha= 0.7, color= [colors[np.sign(val)] for val in stim_diff_total])
+    x_lims = ax.get_xlim()
+    ax.hlines(stim_diff_total[0], -10, 20, alpha= 0.4, linestyles='dashed', colors= 'gray')
+    ax.set_xlim(x_lims)
+    ax.set_xticks(x)
+    ax.set_xticklabels(legend[1:], rotation=40)
+    ax.set_ylabel(r"$\Delta$ über 3 Tage [$\Omega$ x $cm^2$]", fontdict={'size': 15})
+    ax.set_xlabel(r"Cytokine", fontdict={'size': 15})
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    fig.show()
+
 def plot_teer(data_path = None, stimulationen = None, savefig_name= ""):
     if data_path is None:
         raise ValueError('Schatzi die Dateiname nicht vergessen.')
