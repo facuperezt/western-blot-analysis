@@ -203,7 +203,7 @@ def plot_detected_bands(detected_bands, bounding_boxes):
 
 def arg_parser():
     parser = ArgumentParser()
-    parser.add_argument('--image_path', default= 'img.jpeg', type= str, help= 'Path to the blot image to be analyzed.')
+    parser.add_argument('--image_path', default= 'examlpe_blots/img.jpeg', type= str, help= 'Path to the blot image to be analyzed.')
     known, unknown = parser.parse_known_args()
 
     return known

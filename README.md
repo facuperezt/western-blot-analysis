@@ -8,6 +8,10 @@ python auto_band.py --image_path <image_path>
 
 For now it will just show the detected bands and plot the quantified values. To control the band detection manually use quantify.py
 
+![alt Example Blot](https://github.com/facuperezt/western-blot-analysis/blob/main/example_blots/wide_pic_bands.jpeg?raw=true)
+
+![alt Example Result](https://github.com/facuperezt/western-blot-analysis/blob/main/git_images/example_output.png?raw=true)
+
 ## Manual Detection
 ``` bash
 python quantify.py <image_path>
