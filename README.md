@@ -1,7 +1,14 @@
 # western-blot-analysis
 Quick project because ImageJ doesn't port very well to Mac
 
-## Usage
+## Automatic Detection
+``` bash
+python auto_band.py --image_path <image_path>
+```
+
+For now it will just show the detected bands and plot the quantified values. To control the band detection manually use quantify.py
+
+## Manual Detection
 ``` bash
 python quantify.py <image_path>
 ```
