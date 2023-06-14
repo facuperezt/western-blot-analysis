@@ -48,6 +48,13 @@ class Band:
         ax.set_title(self.quantify_peak())
         ax.axis('off')
 
+    def plot_bar(self, ax : plt.Axes):
+        peak = self.quantify_peak()
+        ax.bar(0, peak)
+        ax.set_title(f"{peak:.4f}")
+        ax.axis('off')
+
+
     def quantify_peak(self):
         crv = self.intensity_curve()
         # x = np.linspace(0,1,len(crv))
@@ -94,8 +101,14 @@ class CompareBands:
 
 
     def math(self, background= 0):
-        self.plot_bands(background)
+        fig, axs = plt.subplots(1, len(self.bands), sharex= True, sharey= True)
+        self.plot_bars(axs, background)
         self._ready_to_quantify = True
+        fig.show()
+
+    def plot_bars(self, axs, background= 0):
+        for ax, band in zip(np.asarray(axs), self.bands):
+            band.plot_bar(ax)
 
     def reset(self):
         del self.bands
