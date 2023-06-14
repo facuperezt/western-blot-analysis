@@ -10,7 +10,7 @@ For now it will just show the detected bands and plot the quantified values. To 
 
 ![alt Example Blot](https://github.com/facuperezt/western-blot-analysis/blob/main/example_blots/wide_pic_bands.jpeg?raw=true)
 
-![alt Example Result](https://github.com/facuperezt/western-blot-analysis/blob/main/git_images/example_output.jpeg?raw=true)
+![alt Example Result](https://github.com/facuperezt/western-blot-analysis/blob/main/git_images/wide_pic_bands_output.jpeg?raw=true)
 
 ## Manual Detection
 ``` bash
